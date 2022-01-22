@@ -1,0 +1,16 @@
+﻿@page
+@using TestApplication.Component
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">André .NET Core Web App</h1>
+</div>
+
+<!-- ProductList is a component  -->
+@(await Html.RenderComponentAsync<ProductList>(RenderMode.ServerPrerendered))
+
+
+<script src="_framework/blazor.server.js"></script>

@@ -1,0 +1,8 @@
+C:\Users\12505\source\repos\TestApplication\TestApplication\obj\Debug\net6.0\FirstDotNetWebApplication.csproj.AssemblyReference.cache
+C:\Users\12505\source\repos\TestApplication\TestApplication\obj\Debug\net6.0\FirstDotNetWebApplication.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\12505\source\repos\TestApplication\TestApplication\obj\Debug\net6.0\FirstDotNetWebApplication.AssemblyInfoInputs.cache
+C:\Users\12505\source\repos\TestApplication\TestApplication\obj\Debug\net6.0\FirstDotNetWebApplication.AssemblyInfo.cs
+C:\Users\12505\source\repos\TestApplication\TestApplication\obj\Debug\net6.0\FirstDotNetWebApplication.csproj.CoreCompileInputs.cache
+C:\Users\12505\source\repos\TestApplication\TestApplication\obj\Debug\net6.0\FirstDotNetWebApplication.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\12505\source\repos\TestApplication\TestApplication\obj\Debug\net6.0\FirstDotNetWebApplication.RazorAssemblyInfo.cache
+C:\Users\12505\source\repos\TestApplication\TestApplication\obj\Debug\net6.0\FirstDotNetWebApplication.RazorAssemblyInfo.cs

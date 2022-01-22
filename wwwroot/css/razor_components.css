@@ -1,0 +1,16 @@
+﻿.card-body-razor {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card-body-razor .last-updated {
+    width: 100%;
+}
+
+.card-body-razor small {
+    align-self: flex-end;
+}
+
+.show-modal {
+    display: block !important;
+}
