@@ -1,0 +1,118 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@using TestApplication.Models
+@using TestApplication.Services
+@inject JsonFileProductService ProductServices
+
+<div class="card-columns">
+    @if (ProductServices != null)
+    {
+        ProductServices.ResetCounter().GetNextThreeProducts();
+    }
+    else
+    {
+        return;
+    }
+
+    @while (ProductServices.ThreeProducts[0] != null)
+    {
+        <div class="card-group">
+            @foreach (var product in ProductServices.ThreeProducts)
+            {
+                <div class="card" style="margin: 1%;">
+                    <div class="card-img-top" style="background-image: url('@product.Image');"></div>
+                    <div class="card-body card-body-razor">
+                        <h5 class="card-title">@product.Title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text last-updated"><small class="text-muted">Last updated @DateTime.Now.Minute mins ago</small></p>
+                        <small class="text-muted">
+                            <button @onclick="(e => SelectedProduct(product.Id))"
+                            data-bs-toggle="modal" data-bs-target="#productModal" class="btn-primary btn">
+                                More Info
+                            </button>
+                        </small>
+                    </div>
+                </div>
+            }
+        </div>
+        ProductServices.GetNextThreeProducts();
+    }
+</div>
+
+
+@if (selectedProduct != null)
+{
+    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productTitle">@selectedProduct.Title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-img" style="background-image: url('@selectedProduct.Image');">
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">@selectedProduct.Description</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    @if(voteCount != 0)
+                    {
+                        <span>@voteCount @voteLabel</span>
+                    }
+                    
+                    @for(int i = 0; i < 5; i++)
+                    {
+                        var currentStar = i;
+
+                        if(i <= currentRating)
+                        {
+                            <span class="fa fa-star checked" @onclick="(e => SubmitRating(currentStar))"></span>
+                        }
+                        else
+                        {
+                            <span class="fa fa-star" @onclick="(e => SubmitRating(currentStar))"></span>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@code {
+    Product? selectedProduct;
+
+    void SelectedProduct(string? productId)
+    {
+        selectedProduct = ProductServices.GetProducts().First(x => x.Id == productId);
+        GetCurrentRating();
+    }
+
+    int currentRating = 0;
+    int voteCount = 0;
+    string? voteLabel;
+
+    void GetCurrentRating()
+    {
+        if (selectedProduct.Ratings != null)
+        {
+            voteLabel = voteCount > 1 ? "Votes" : "Vote";
+            voteCount = selectedProduct.Ratings.Count();
+            currentRating = selectedProduct.Ratings.Sum() / voteCount;
+        }
+
+        System.Console.WriteLine($"Current rating for {selectedProduct.Id} : {currentRating}");
+    }
+
+
+    void SubmitRating(int rating)
+    {
+        System.Console.WriteLine($"Current rating for {selectedProduct.Id} : {rating}");
+        ProductServices.AddRatings(selectedProduct.Id, rating);
+        SelectedProduct(selectedProduct.Id);
+    }
+
+}

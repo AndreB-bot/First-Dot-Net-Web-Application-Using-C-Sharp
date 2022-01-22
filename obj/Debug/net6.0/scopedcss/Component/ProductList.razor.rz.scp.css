@@ -1,0 +1,12 @@
+.card-body-razor[b-1qgkca9gwj] {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card-body-razor .last-updated[b-1qgkca9gwj] {
+    width: 100%;
+}
+
+.card-body-razor small[b-1qgkca9gwj] {
+    align-self: flex-end;
+}
